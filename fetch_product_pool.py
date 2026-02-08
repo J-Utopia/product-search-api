@@ -19,8 +19,7 @@ HEADERS = {
 def build_payload(areaKeyWordId, searchFrom, searchTo, startingPoint, travelType, page=1, pageSize=20):
     return {
         "themeId": "",
-        "areaId": "",                    # ❗ 비워두거나 제거
-        "areaKeyWordId": [areaKeyWordId],# ✅ UUID 기준
+        "areaKeyWordId": [areaKeyWordId],
         "masterCodeIds": [],
         "masterCodes": [],
         "page": page,
