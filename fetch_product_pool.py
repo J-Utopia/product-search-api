@@ -14,12 +14,13 @@ HEADERS = {
 }
 
 # =====================
-# payload 생성 함수 (공통)
+# payload 생성 함수
+# 핵심: 값은 같고, 실제 호출 키는 areaId
 # =====================
 def build_payload(areaKeyWordId, searchFrom, searchTo, startingPoint, travelType, page=1, pageSize=20):
     return {
         "themeId": "",
-        "areaKeyWordId": [areaKeyWordId],
+        "areaId": areaKeyWordId,     # ✅ SearchProductMaster가 읽는 키
         "masterCodeIds": [],
         "masterCodes": [],
         "page": page,
@@ -39,6 +40,7 @@ def build_payload(areaKeyWordId, searchFrom, searchTo, startingPoint, travelType
         },
     }
 
+
 def format_dates(dates):
     if not dates:
         return None
@@ -47,6 +49,7 @@ def format_dates(dates):
         for d in dates
         if isinstance(d, dict) and "night" in d and "days" in d
     )
+
 
 def format_air_names(product_codes):
     if not product_codes:
@@ -58,11 +61,8 @@ def format_air_names(product_codes):
     }
     return ", ".join(sorted(air_names)) if air_names else None
 
+
 def fetch_product_pool(areaKeyWordId, searchFrom, searchTo, startingPoint, travelType, page=1, pageSize=20):
-    """
-    FastAPI에서 호출할 함수.
-    return: dict (총상품/총페이지/상품리스트)
-    """
     payload = build_payload(
         areaKeyWordId=areaKeyWordId,
         searchFrom=searchFrom,
@@ -81,6 +81,7 @@ def fetch_product_pool(areaKeyWordId, searchFrom, searchTo, startingPoint, trave
 
     products = result.get("productMaster", []) or []
     output = []
+
     for p in products:
         master_code_id = p.get("masterCodeId")
         output.append(

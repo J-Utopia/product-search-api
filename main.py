@@ -8,9 +8,10 @@ app = FastAPI(title="Product Search API")
 
 # =====================
 # 요청 Body 스키마
+# (외부/GPTs 기준 네이밍)
 # =====================
 class SearchRequest(BaseModel):
-    areaKeyWordId: str     # ✅ UUID
+    areaKeyWordId: str          # ✅ 외부 기준 이름
     searchFrom: str
     searchTo: str
     startingPoint: List[str]
