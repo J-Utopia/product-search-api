@@ -20,7 +20,7 @@ HEADERS = {
 def build_payload(areaKeyWordId, searchFrom, searchTo, startingPoint, travelType, page=1, pageSize=20):
     return {
         "themeId": "",
-        "areaId": areaKeyWordId,     # ✅ SearchProductMaster가 읽는 키
+        "areaId": areaKeyWordId,
         "masterCodeIds": [],
         "masterCodes": [],
         "page": page,
@@ -39,7 +39,6 @@ def build_payload(areaKeyWordId, searchFrom, searchTo, startingPoint, travelType
             "travelType": travelType,
         },
     }
-
 
 def format_dates(dates):
     if not dates:
