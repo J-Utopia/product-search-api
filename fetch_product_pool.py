@@ -16,11 +16,11 @@ HEADERS = {
 # =====================
 # payload 생성 함수 (공통)
 # =====================
-def build_payload(areaId, searchFrom, searchTo, startingPoint, travelType, page=1, pageSize=20):
+def build_payload(areaKeyWordId, searchFrom, searchTo, startingPoint, travelType, page=1, pageSize=20):
     return {
         "themeId": "",
-        "areaId": areaId,
-        "areaKeyWordId": [],
+        "areaId": "",                    # ❗ 비워두거나 제거
+        "areaKeyWordId": [areaKeyWordId],# ✅ UUID 기준
         "masterCodeIds": [],
         "masterCodes": [],
         "page": page,
@@ -59,13 +59,13 @@ def format_air_names(product_codes):
     }
     return ", ".join(sorted(air_names)) if air_names else None
 
-def fetch_product_pool(areaId, searchFrom, searchTo, startingPoint, travelType, page=1, pageSize=20):
+def fetch_product_pool(areaKeyWordId, searchFrom, searchTo, startingPoint, travelType, page=1, pageSize=20):
     """
     FastAPI에서 호출할 함수.
     return: dict (총상품/총페이지/상품리스트)
     """
     payload = build_payload(
-        areaId=areaId,
+        areaKeyWordId=areaKeyWordId,
         searchFrom=searchFrom,
         searchTo=searchTo,
         startingPoint=startingPoint,

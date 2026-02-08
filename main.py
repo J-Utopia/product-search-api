@@ -10,7 +10,7 @@ app = FastAPI(title="Product Search API")
 # 요청 Body 스키마
 # =====================
 class SearchRequest(BaseModel):
-    areaId: int
+    areaId: str
     searchFrom: str
     searchTo: str
     startingPoint: List[str]
@@ -34,7 +34,7 @@ def health_check():
 def search_products(req: SearchRequest):
     try:
         result = fetch_product_pool(
-            areaId=req.areaId,
+            areaKeyWordId=req.areaKeyWordId,
             searchFrom=req.searchFrom,
             searchTo=req.searchTo,
             startingPoint=req.startingPoint,
