@@ -10,7 +10,7 @@ app = FastAPI(title="Product Search API")
 # 요청 Body 스키마
 # =====================
 class SearchRequest(BaseModel):
-    areaId: str
+    areaKeyWordId: str     # ✅ UUID
     searchFrom: str
     searchTo: str
     startingPoint: List[str]
@@ -33,7 +33,7 @@ def health_check():
 @app.post("/search")
 def search_products(req: SearchRequest):
     try:
-        result = fetch_product_pool(
+        return fetch_product_pool(
             areaKeyWordId=req.areaKeyWordId,
             searchFrom=req.searchFrom,
             searchTo=req.searchTo,
@@ -42,7 +42,5 @@ def search_products(req: SearchRequest):
             page=req.page,
             pageSize=req.pageSize,
         )
-        return result
-
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
