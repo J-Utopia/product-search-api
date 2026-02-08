@@ -21,6 +21,7 @@ def build_payload(areaKeyWordId, searchFrom, searchTo, startingPoint, travelType
     return {
         "themeId": "",
         "areaId": areaKeyWordId,
+        "areaKeyWordId": [],
         "masterCodeIds": [],
         "masterCodes": [],
         "page": page,
